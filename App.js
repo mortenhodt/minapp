@@ -17,7 +17,7 @@ const firebaseConfig = {
   messagingSenderId: "767272821612",
   appId: "1:767272821612:web:524e0707313ce559348949"
 };
-
+//Eksporterer bruker
 export default function App() {
 
 //Bruker opprettes
