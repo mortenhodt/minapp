@@ -63,7 +63,7 @@ function LoginForm() {
 
 
 
-//Padding og styling create
+//Padding og styling create 123
 const styles = StyleSheet.create({
     error: {
         color: 'red',
