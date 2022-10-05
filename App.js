@@ -55,9 +55,7 @@ const [user, setUser] = useState({ loggedIn: false });
 Opprett hurtig en bruker eller logg inn
           </Text>
 
-          <Card style={{padding:20}}>
-            <SignUpForm />
-          </Card>
+
 
           <Card style={{padding:20}}>
             <LoginForm />

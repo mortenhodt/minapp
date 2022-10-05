@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
 
@@ -35,7 +36,6 @@ function LoginForm() {
         return <Button onPress={() => handleSubmit()} title="Login" />;
     };
 
-
     return (
         <View>
             <Text style={styles.header}>Login</Text>
@@ -56,9 +56,12 @@ function LoginForm() {
                 <Text style={styles.error}>Error: {errorMessage}</Text>
             )}
             {renderButton()}
+
         </View>
     );
 }
+
+
 
 //Padding og styling
 const styles = StyleSheet.create({
@@ -74,6 +77,7 @@ const styles = StyleSheet.create({
         fontSize: 40,
     },
 });
+
 
 //Eksporteres og hentes i App.js
 export default LoginForm
