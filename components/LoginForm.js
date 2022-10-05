@@ -56,14 +56,14 @@ function LoginForm() {
                 <Text style={styles.error}>Error: {errorMessage}</Text>
             )}
             {renderButton()}
-//view
+
         </View>
     );
 }
 
 
 
-//Padding og styling
+//Padding og styling create
 const styles = StyleSheet.create({
     error: {
         color: 'red',
