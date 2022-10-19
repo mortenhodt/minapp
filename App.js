@@ -7,7 +7,6 @@ import ProfileScreen from "./components/ProfileScreen";
 import { Card } from 'react-native-paper';
 import firebase from "firebase/compat";
 
-
 //Config til firebase
 const firebaseConfig = {
   apiKey: "AIzaSyA8Rjv6wn64ZrNubtap3dlgK2SRkqgS3LA",
@@ -54,12 +53,13 @@ const [user, setUser] = useState({ loggedIn: false });
           <Text style={styles.paragraph}>
 Opprett hurtig en bruker eller logg inn
           </Text>
-
-
-
+          <Card style={{padding:20}}>
+            <SignUpForm />
+          </Card>
           <Card style={{padding:20}}>
             <LoginForm />
           </Card>
+
 
         </View>
     )

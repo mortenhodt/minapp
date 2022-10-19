@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useState} from "react";
 import {
     Button,
     Text,
@@ -9,7 +9,10 @@ import {
 } from 'react-native';
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat";
-import { useNavigate } from "react-router-dom";
+import {Link, Routes, Route, useNavigate } from "react-router-dom";
+import SignUpForm from "./SignUpForm";
+
+
 
 function LoginForm() {
 
@@ -35,7 +38,6 @@ function LoginForm() {
     const renderButton = () => {
         return <Button onPress={() => handleSubmit()} title="Login" />;
     };
-
     return (
         <View>
             <Text style={styles.header}>Login</Text>
@@ -56,10 +58,10 @@ function LoginForm() {
                 <Text style={styles.error}>Error: {errorMessage}</Text>
             )}
             {renderButton()}
+
         </View>
     );
 }
-
 
 
 //Padding og styling
@@ -76,6 +78,8 @@ const styles = StyleSheet.create({
         fontSize: 40,
     },
 });
+
+
 
 
 //Eksporteres og hentes i App.js

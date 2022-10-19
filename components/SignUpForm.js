@@ -31,7 +31,6 @@ function SignUpForm() {
         } catch (error){
             setErrorMessage(error.message)
         }
-
     }
 
 //Oppretter inputfields
