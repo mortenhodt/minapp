@@ -10,7 +10,7 @@ import firebase from "firebase/compat";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 
-function SignUpForm() {
+function SignUpForm( {navigation}) {
     //Instantiering af state-variabler, som skal benyttes i SignUpForm
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -20,6 +20,9 @@ function SignUpForm() {
 //Her initieres brukeropprettelsen
     const renderButton = () => {
         return <Button onPress={() => handleSubmit()} title="Create user" />;
+    };
+    const logInButton = () => {
+        return <Button onPress={() => navigation.navigate('Login')} title="Have a user? Log in Here" />;
     };
 
 
@@ -54,6 +57,7 @@ function SignUpForm() {
                 <Text style={styles.error}>Error: {errorMessage}</Text>
             )}
             {renderButton()}
+            {logInButton()}
         </View>
     );
 }

@@ -6,6 +6,8 @@ import LoginForm from "./components/LoginForm";
 import ProfileScreen from "./components/ProfileScreen";
 import { Card } from 'react-native-paper';
 import firebase from "firebase/compat";
+import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from "@react-navigation/stack";
 
 //Config til firebase
 const firebaseConfig = {
@@ -21,6 +23,8 @@ export default function App() {
 
 //Bruker opprettes
 const [user, setUser] = useState({ loggedIn: false });
+
+const Stack = createStackNavigator();
 
   //Koden sikrer at kun én Firebase initieres ved bruk
   if (!firebase.apps.length) {
@@ -49,19 +53,18 @@ const [user, setUser] = useState({ loggedIn: false });
 //Vises ved første siden
   const GuestPage = () => {
     return(
-        <View style={styles.container}>
-          <Text style={styles.paragraph}>
-Opprett hurtig en bruker eller logg inn
-          </Text>
-          <Card style={{padding:20}}>
-            <SignUpForm />
-          </Card>
-          <Card style={{padding:20}}>
-            <LoginForm />
-          </Card>
-
-
-        </View>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+                name="Login"
+                component={LoginForm}
+            />
+            <Stack.Screen
+                name="Signup"
+                component={SignUpForm}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
     )
   }
 //Sender bruker til ProfileScreen

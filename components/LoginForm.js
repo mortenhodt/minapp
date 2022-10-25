@@ -14,7 +14,7 @@ import SignUpForm from "./SignUpForm";
 
 
 
-function LoginForm() {
+function LoginForm( {navigation} ) {
 
     //Statevariabler som håndterer login
     const [email, setEmail] = useState('')
@@ -38,6 +38,9 @@ function LoginForm() {
     const renderButton = () => {
         return <Button onPress={() => handleSubmit()} title="Login" />;
     };
+    const signInButton = () => {
+        return <Button onPress={() => navigation.navigate('Signup')} title="Not a user? Sign in Here" />;
+    };
     return (
         <View>
             <Text style={styles.header}>Login</Text>
@@ -58,6 +61,7 @@ function LoginForm() {
                 <Text style={styles.error}>Error: {errorMessage}</Text>
             )}
             {renderButton()}
+            {signInButton()}
 
         </View>
     );
