@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 
 import { initializeApp } from "firebase/app";
@@ -14,8 +14,8 @@ import FavouritesScreen from "./navigator/FavouritesScreen.js";
 import ExploreScreen from "./navigator/ExploreScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
 const favouriteScreenText = "Your favourites"
-const settingsScreenText = "Velkommen!"
-
+const exploreScreenText = "Velkommen!"
+const settingsScreenText = "Edit details for alkn@saxo.com"
 function ProfileScreen () {
 
     //arrow function som håndterer en async log ut handling
@@ -73,9 +73,9 @@ function ProfileScreen () {
                     },
                 })}
                 >
-                    <Tab.Screen name="Explore" children={()=><ExploreScreen prop={settingsScreenText}/>} />
+                    <Tab.Screen name="Explore" children={()=><ExploreScreen prop={exploreScreenText}/>} />
                     <Tab.Screen name="Favourites" children={()=><FavouritesScreen prop={favouriteScreenText}/>} />
-                    <Tab.Screen name="Settings" component={SettingsScreen} />
+                    <Tab.Screen name="Settings" children={() =><SettingsScreen prop= {settingsScreenText}/>} />
                 </Tab.Navigator>
             </NavigationContainer>
         </View>
