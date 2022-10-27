@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { initializeApp } from "firebase/app";
 import firebase from "firebase/compat";
-import {Link, Routes, Route, useNavigate } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
 
 

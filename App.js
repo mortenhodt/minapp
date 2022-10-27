@@ -4,7 +4,6 @@ import SignUpForm from './components/SignUpForm';
 import { initializeApp } from "firebase/app";
 import LoginForm from "./components/LoginForm";
 import ProfileScreen from "./components/ProfileScreen";
-import { Card } from 'react-native-paper';
 import firebase from "firebase/compat";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
