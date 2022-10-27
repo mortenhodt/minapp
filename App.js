@@ -8,6 +8,7 @@ import { Card } from 'react-native-paper';
 import firebase from "firebase/compat";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
+//Comment
 
 //Config til firebase
 const firebaseConfig = {
