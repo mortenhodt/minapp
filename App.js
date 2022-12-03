@@ -69,7 +69,7 @@ const Stack = createStackNavigator();
   }
 //Sender bruker til ProfileScreen
   return user.loggedIn ? <ProfileScreen /> : <GuestPage/> ;
-
+ 
 }
 
 const styles = StyleSheet.create({
