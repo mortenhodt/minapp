@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Slider from "@react-native-community/slider";
 
 
-
+// function Explore page
 function ExplorePage() {
     //lager en konstant setActiveMap som har som standard "renting"
     const [activeMap, setActiveMap] = useState("RENTING")
