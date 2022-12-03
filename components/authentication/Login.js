@@ -5,7 +5,6 @@ import firebase from "firebase/compat";
 import {AppContext} from "../AppContext";
 
 
-
 function Login({navigation}) {
 //Instantiering af statevariabler til brug i appen
     const [globalUser, setGlobalUser] = useContext(AppContext)
