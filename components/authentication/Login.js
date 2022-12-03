@@ -56,14 +56,7 @@ function Login({navigation}) {
     //Layout af app
     return (
         <View style={{...Styles.container, minHeight: height}}>
-
-
             <View style={Styles.subContainer} >
-            
-          <Text style={Styles.title}>
-                DockIt
-            </Text>
-        
                 <Text style={Styles.title} >Login </Text>
                 <TextInput
                     value={username}
