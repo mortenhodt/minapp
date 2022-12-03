@@ -5,7 +5,7 @@ import Slider from "@react-native-community/slider";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
-
+//export Renting Page
 export const RentingPage = () => {
     //lager en konstant setActiveMap som har som standard "renting"
     const [boatSize, setBoatSize] = useState(30);
