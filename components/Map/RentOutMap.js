@@ -1,10 +1,40 @@
-import React, { useEffect, useState, useRef } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
+import React, { useEffect, useState, useContext } from "react";
+import { View, Text, TextInput, StyleSheet, Pressable, Alert } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Slider from "@react-native-community/slider";
+import firebase from "firebase/compat";
+import {AppContext} from "../AppContext";
+
+const submitParkingSpot = async (parkingSpot) => {
+  if (
+    !parkingSpot.dockName 
+    || !parkingSpot.dockNumber 
+    || !parkingSpot.available 
+    || !parkingSpot.ownerID 
+    || !parkingSpot.boatSize 
+    || !parkingSpot.coordinate 
+    || !parkingSpot.coordinate.latitude
+    || !parkingSpot.coordinate.longitude
+  ) {
+    Alert.alert("Error, incorrect information!");
+    return;
+  }
+
+  try {
+    await firebase
+      .database()
+      .ref('/parkingSpots/')
+      .push(parkingSpot);
+    Alert.alert("Parking spot saved!");
+  } catch (error) {
+    console.log(error);
+    Alert.alert("Something went wrong. Try again!");
+  }
+};
 
 // lager og eksporterer konstanten RentOutMap for å kunne lagre informasjonen som blir lagt inn av bruker
 export const RentOutMap = () => {
+  const [globalUser, setGlobalUser] = useContext(AppContext)
   const [boatSize, setBoatSize] = useState(30);
   const [dockName, setDockName] = useState("");
   const [dockNumber, setDocNumber] = useState("");
@@ -12,18 +42,29 @@ export const RentOutMap = () => {
   const [mapType, setMapType] = useState("standard");
   // const [parkingLots, setParkingLots] = useState([...])
 
+  const cleanup = () => {
+    setBoatSize(30);
+    setDockName("");
+    setDocNumber("");
+    setMapPin();
+    setMapType("standard");
+  };
+
   useEffect(() => {
     //Fetch parking lots saved in the database
     // setParkingLots(...)
   }, []);
 
-  const onPress = () => {
-    // Check that all the data has been input
-    // if(!boatSize) display error
-    //....
-    // if(!mapPin) display error
-    // Save parking lot to the database
-    // saveToDB({boatSize, dockName, dockNumber, mapPin})
+  const onPress = async () => {
+    await submitParkingSpot({
+      boatSize,
+      dockName,
+      dockNumber,
+      ownerID: globalUser.id,
+      available: true,
+      coordinate: mapPin,
+    });
+    cleanup();
   };
 
   // if(parkingLots.length > 0){
