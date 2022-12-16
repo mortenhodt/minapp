@@ -46,7 +46,7 @@ function EntranceStack() {
     );
 }
 
-// Bottom tab navigator til navigering mellem homepage og entrance-stack-siderne
+// Nedrst for Profilen -Tab navigator
 function ProfileTab() {
     return (
         <Tab.Navigator

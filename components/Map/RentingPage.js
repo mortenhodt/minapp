@@ -5,6 +5,7 @@ import Slider from "@react-native-community/slider";
 import firebase from "firebase/compat";
 import RentingModal from "./RentingModal";
 
+//Under brukes hvis nødvendig
 /*
 Parking spot data structure:
 {
@@ -19,13 +20,13 @@ Parking spot data structure:
   },
 }
 */
-
+//Opretter variablen for å bruke Parkeringsplass
 const useParkingSpots = () => {
   const [parkingSpots, setParkingSpots] = useState([]);
   const [filterValue, setFilterValue] = useState();
   let result = parkingSpots.filter(spot => spot.available);
 
-  // sjekkker om den valgt strl fra bruker er lik eller mindre enn den satte strl på utleier
+  // sjekker om den valgt strl fra bruker er lik eller mindre enn den satte strl på utleier
   if (filterValue) {
     result = result.filter(spot => spot.boatSize >= filterValue);
   }
@@ -33,11 +34,13 @@ const useParkingSpots = () => {
 
   return [result, setParkingSpots, setFilterValue];
 }
+//Konstant for å få selektert parkeringsplass
 
 const getSelectedParkingSpot = (id, parkingSpots) => {
   return parkingSpots.find(spot => spot.id == id);
 }
 
+//Renting page
 export const RentingPage = () => {
     const [boatSize, setBoatSize] = useState(30);
     const [mapType, setMapType] = useState("standard");

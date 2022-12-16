@@ -10,13 +10,13 @@ import Slider from "@react-native-community/slider";
 function ExplorePage() {
     //lager en konstant setActiveMap som har som standard "renting"
     const [activeMap, setActiveMap] = useState("RENTING")
-
+//returnerer
     return (
 <SafeAreaView>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainerStyle}>
 
       <View
-      
+      //Styling
           style={{
             overflow: "hidden",
             borderRadius: 6,
@@ -70,7 +70,7 @@ function ExplorePage() {
             >
               <Text
                 style={{
-                    //styler teksten
+                    //styler teksten ( RENT OUT)
                   color: activeMap === "RENTING_OUT" ? "white" : "#333",
                   fontWeight: activeMap === "RENTING_OUT" ? "bold" : "normal",
                 }}
@@ -82,7 +82,7 @@ function ExplorePage() {
         </View>
 
        
-        
+
         {activeMap === "RENTING" &&
         <RentingPage />
 }
