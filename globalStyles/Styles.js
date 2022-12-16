@@ -1,6 +1,7 @@
 import {StyleSheet, Dimensions} from "react-native";
 
 //creating a globalStyles stylesheet for the whole app
+//Kan endre her hvis tid
 const Styles = StyleSheet.create({
     container: {
         flex: 1,
