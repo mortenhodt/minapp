@@ -6,6 +6,9 @@ import {formatDayOrMonth} from "../../helperfunctions";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import React from "react";
 
+//Siste funksjon - Profil/bruker
+//også kunne oppdatere
+//+ Kanselere@// + kalender funksjon
 function ModalProfile (props)  {
     return <Modal style={{minHeight: props.minHeight, justifyContent: "center"}}
                   isVisible={props.visible}>
@@ -67,9 +70,10 @@ function ModalProfile (props)  {
         </View>
     </Modal>;
 }
+//Eksporter
 export default ModalProfile
 
-
+//Lokal styling
 const stylesLocal = StyleSheet.create({
     btnLocalDateTime: {
         width: 200,

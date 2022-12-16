@@ -3,8 +3,9 @@ import {Pressable, StyleSheet, Text, TextInput, View} from "react-native";
 import Styles from "../../../globalStyles/Styles";
 import React from "react";
 
+//Funksjon komponenent
 function CredentialsComponent (props) {
-
+//Styling - global styling
     return <Modal style={{minHeight: props.minHeight, justifyContent: "center"}}
                   isVisible={props.visible}>
         <View style={{
@@ -54,10 +55,10 @@ function CredentialsComponent (props) {
         </View>
     </Modal>;
 }
-
+//Eksporter
 export default CredentialsComponent;
 
-
+//Align
 const stylesLocal = StyleSheet.create({
     btnLocalDateTime: {
         width: 200,
