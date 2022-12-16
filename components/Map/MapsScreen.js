@@ -10,23 +10,10 @@ import Slider from "@react-native-community/slider";
 function ExplorePage() {
     //lager en konstant setActiveMap som har som standard "renting"
     const [activeMap, setActiveMap] = useState("RENTING")
-    const [boatSize, setBoatSize] = useState(30);
-    const [mapType, setMapType] = useState("standard");
-
-
-    const onPress = () => {
-        // Check that all the data has been input
-        // if(!boatSize) display error
-        //....
-        // if(!mapPin) display error
-        // Save parking lot to the database
-        // saveToDB({boatSize, dockName, dockNumber, mapPin})
-      };
 
     return (
 <SafeAreaView>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainerStyle}>
-
 
       <View
       
@@ -36,8 +23,8 @@ function ExplorePage() {
             flexDirection: "row",
             position: "absolute",
             left: 20,
-          marginBottom: 50,
-          paddingTop: 10,
+            marginBottom: 50,
+            paddingTop: 10,
 
           }}
         >
@@ -74,6 +61,7 @@ function ExplorePage() {
             onPress={() => setActiveMap("RENTING_OUT")}
           >
             <View
+            //posisjonering
               style={{
                 paddingVertical: 8,
                 paddingHorizontal: 16,
@@ -110,7 +98,7 @@ function ExplorePage() {
     }
 
 
-
+// eksporterer hele funksjonen explorepage, for å kunne importere den senere
 export default ExplorePage
 
 //Lokal styling 

@@ -1,8 +1,7 @@
-import {StyleSheet, Text, View, Dimensions, Button, ScrollView, Pressable, TextInput,onPress, Alert} from "react-native";
+import {StyleSheet, Text, View,Pressable, Alert} from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import React, {useState, useEffect} from "react";
 import Slider from "@react-native-community/slider";
-import DateTimePicker from '@react-native-community/datetimepicker';
 import firebase from "firebase/compat";
 import RentingModal from "./RentingModal";
 
@@ -26,9 +25,11 @@ const useParkingSpots = () => {
   const [filterValue, setFilterValue] = useState();
   let result = parkingSpots.filter(spot => spot.available);
 
+  // sjekkker om den valgt strl fra bruker er lik eller mindre enn den satte strl på utleier
   if (filterValue) {
-    result = result.filter(spot => spot.boatSize <= filterValue);
+    result = result.filter(spot => spot.boatSize >= filterValue);
   }
+  // returnerer kun de plassene som passer til filteret
 
   return [result, setParkingSpots, setFilterValue];
 }
@@ -38,22 +39,25 @@ const getSelectedParkingSpot = (id, parkingSpots) => {
 }
 
 export const RentingPage = () => {
-    //lager en konstant setActiveMap som har som standard "renting"
     const [boatSize, setBoatSize] = useState(30);
     const [mapType, setMapType] = useState("standard");
     const [parkingSpots, setParkingSpots, setFilterValue] = useParkingSpots([]);
     const [selectedMarker, setSelectedMarker] = useState();
     const [modalVisible, setModalVisible] = useState(false);
-
+// selectedParkingSpot tar inn selectedMarked og parkingspots, dette gjør det mulig å hente ut data
+// som id for å bruke til å hente ut annen data fra databasen
     const selectedParkingSpot = getSelectedParkingSpot(selectedMarker, parkingSpots);
 
+    // etter å ha funnet id til marker kaller vi på setSelectedMarker med input "id" og setModalVisible til true
+    // det vil da vise modal popopen
     const onMarkerSelectGenerator = (id) => {
       return () => {
         setSelectedMarker(id);
         setModalVisible(true);
       };
     };
-
+// onBook tar inn id, og ... henter alle boatSize osv, deretter settes den til available: false
+//slik at den ikke lenger vil være synlig på kartet, til slutt settes setModalVisible til false slik at den lukkes.
     const onBook = (id) => {
       const data = {
         ...selectedParkingSpot,
@@ -62,30 +66,36 @@ export const RentingPage = () => {
       delete data["id"]; 
 
       setModalVisible(false);
-      
+      // oppdaterer båtplassen(id) med den nye dataen
       try {
         firebase
           .database()
           .ref(`/parkingSpots/${id}`)
           .update(data);
-        
-        Alert.alert(`Booking confirmed! (${id})`);
+        // alert til bruker om at booking er confirmed
+        Alert.alert(`Booking confirmed!`);
       } catch (error) {
+        //dersom det skjer en feil vil det komme en alert til brukeren
         console.log(error);
         Alert.alert("Something went wrong!");
       }
     };
 
+
     useEffect(() => {
       async function fetchData() {
         let listener;
         let ref;
-
+// henter listen med parkingSpots fra databasen
         try {
           ref = firebase
             .database()
             .ref('/parkingSpots/');
-
+// listener returnerer en referanse til listeneren
+//bruker en snapshot av listen til å finne id´en til instansen av parkingSpots
+//går deretter gjennom listen til den finner instansen med riktig "id"
+// sjekker om data[id].id = id for å sikre at det er riktig
+//returnerer data[id]
           listener = ref.on('value', (snapshot) => {
               const data = snapshot.val();
               setParkingSpots(Object.keys(data).map((id) => {
@@ -93,11 +103,11 @@ export const RentingPage = () => {
                 return data[id];
               }));
             });
+            // ved en feil vil brukeren få en alert
         } catch (error) {
           console.log(error);
           Alert.alert("Something went wrong!");
         }
-
         return () => {
           listener && ref && ref.off('value', listener);
         };
@@ -107,8 +117,9 @@ export const RentingPage = () => {
 
 
     return (
+      // Styling og overskrifter
+      //mapView er forklart i RentOutMap
     <View>
-
     <View style={{ paddingHorizontal: 30 }}>
     <Text style={{ fontSize: 20, marginBottom: 40, paddingTop:40 }}>
      Find a boat parking spot
@@ -118,7 +129,7 @@ export const RentingPage = () => {
     <Text style={{ fontSize: 15, marginBottom: 10, paddingTop:10 }}>
      Time picker will be put in here
     </Text>
- 
+
     <View>
             <MapView
               initialRegion={{
@@ -240,6 +251,7 @@ export const RentingPage = () => {
             </Text>
           </Pressable>
       </View>
+      
       {
         selectedParkingSpot && (
           <RentingModal
@@ -257,3 +269,5 @@ export const RentingPage = () => {
     </View>
     );
 };
+// selectedparkingspot er som tidligere nevnt den markøren brukeren har trykket på, den informasjonen
+// blir henvist til rentingModal og den aktualle dataen satt, deretter blir setModalVisable og onBook kalt på 

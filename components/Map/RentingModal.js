@@ -1,6 +1,11 @@
-import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import React, {} from "react";
+import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
 
+// RentingModal henter dataen fra databasen og id fra RentingPage til å vise frem informasjonen
+// om den båtplassen brukeren har valgt
+// dockName osv blir hentet fra RentingPage som er funnet med id, og blir nå vist til brukeren
+// gjennom denne modal
+// ved onPress blir onBook (id) kalt på som vil sette plassen til avaiable (false)
 const RentingModal = ({
     id,
     dockName,
@@ -18,6 +23,7 @@ const RentingModal = ({
         setModalVisible(!modalVisible);
     }}
     >
+
     <View style={styles.centeredView}>
         <View style={styles.modalView}>
         <Text style={styles.modalText}>Dock Name: {dockName}</Text>
@@ -40,6 +46,7 @@ const RentingModal = ({
     </Modal>
 );
 
+// styling
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
@@ -85,3 +92,4 @@ const styles = StyleSheet.create({
 });
 
 export default RentingModal;
+// eksporter for å kunne brukes i RentingPage

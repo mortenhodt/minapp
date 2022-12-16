@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TextInput, StyleSheet, Pressable, Alert } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Slider from "@react-native-community/slider";
 import firebase from "firebase/compat";
 import {AppContext} from "../AppContext";
 
+
+// lager en async function, der "if" all input har blitt lagt inn fra bruker vil funksjonen fortsette ved try
 const submitParkingSpot = async (parkingSpot) => {
   if (
     !parkingSpot.dockName 
@@ -16,17 +18,20 @@ const submitParkingSpot = async (parkingSpot) => {
     || !parkingSpot.coordinate.latitude
     || !parkingSpot.coordinate.longitude
   ) {
+    // dersom en bruker ikke har fyllt ut alle felt kommer denne meldingen opp
     Alert.alert("Error, incorrect information!");
     return;
   }
-
+// her kaller man på firebase og finner listen parkingSpots, og pusher den nye instansen fra brukerens input
   try {
     await firebase
       .database()
       .ref('/parkingSpots/')
       .push(parkingSpot);
+      // ved suksess vises denne meldingen
     Alert.alert("Parking spot saved!");
   } catch (error) {
+    //dersom noe går galt vil brukeren få opp denne meldingen
     console.log(error);
     Alert.alert("Something went wrong. Try again!");
   }
@@ -42,6 +47,7 @@ export const RentOutMap = () => {
   const [mapType, setMapType] = useState("standard");
   // const [parkingLots, setParkingLots] = useState([...])
 
+  // cleanup funksjonen setter alle consts tilbake, det gir brukeren ett tydelig tegn på at de har lagret
   const cleanup = () => {
     setBoatSize(30);
     setDockName("");
@@ -50,10 +56,6 @@ export const RentOutMap = () => {
     setMapType("standard");
   };
 
-  useEffect(() => {
-    //Fetch parking lots saved in the database
-    // setParkingLots(...)
-  }, []);
 
   const onPress = async () => {
     await submitParkingSpot({
@@ -67,20 +69,11 @@ export const RentOutMap = () => {
     cleanup();
   };
 
-  // if(parkingLots.length > 0){
-  //     return (
-  //     <View>
-  //         {parkingLots.map(parkingLot =>
-  //         <View>
-  //             <Text>{parkingLot.name}</Text>
-  //         </View>
-  //         )}
-  //     </View>
-  //     )
-  // }
 
   return (
     // lager en overskrift for RENTING_OUT og båt størrelsen
+    // styling
+    // henter int fra boatsize og viser til bruker
     <View style={{ paddingHorizontal: 30 }}>
       <Text style={{ fontSize: 20, marginBottom: 40, paddingTop: 40 }}>
         Add a boat parking spot
@@ -237,7 +230,7 @@ export const RentOutMap = () => {
     </View>
   );
 };
-
+//styling
 const style = StyleSheet.create({
   textInput: {
     height: 40,

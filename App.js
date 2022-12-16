@@ -18,8 +18,6 @@ const firebaseConfig = {
 };
 
 
-
-
 export default function App() {
   //Creating a user state variable
   //const {globalUser, setGlobalUser } = useContext(AppContext);
