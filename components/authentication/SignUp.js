@@ -13,6 +13,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import {formatDayOrMonth} from "../helperfunctions";
 import {AppContext} from "../AppContext";
 
+//Funksjon Sign Up
 
 function SignUp({navigation}) {
 //Instatering af relevante statevaribler.Bidm mærke i måden hvorpå man henter en globalStyles bruger, defineret i vores AppContext.
@@ -27,29 +28,29 @@ function SignUp({navigation}) {
     const [password, setPassword] = useState("");
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-    // Comtroller til at styre navigering mellem sider i stacknavigator.
+    // Controller til å styre navigering mellem sider i stacknavigator.
     const navController = (navigation, route) =>{
         navigation.navigate(route)
     }
 
-    // Comtroller til at styre fremvisning af datePicker komponent .
+    // Controller til at styre fremvisning af datePicker komponent
 
     const showDatePicker = () => {
         setDatePickerVisibility(true);
     };
 
-    // Comtroller til at styre fremvisning af datePicker komponent .
+    // Controller til at styre fremvisning af datePicker komponent .
     const hideDatePicker = () => {
         setDatePickerVisibility(false);
     };
 
-    // Hjælper metode til at populerer felter koblet til den globale bruger
+    // Hjelper metode til å populerer felter koblet til den globale bruker
     const createUser = () => {
         return {birtDate: day, birthMonth: month, birthYear: year, firstname: firstname, lastname: lastname, username: username }
     }
 
 
-    // Opdaterer alle statevariabler, som relaterer sig til datoer
+    // Oppdaterer alle statevariabler, som relaterer sig til datoer
     const handleConfirm = (date) => {
         setDay(date.getDate())
         setMonth((date.getMonth())+1)
@@ -58,20 +59,18 @@ function SignUp({navigation}) {
     };
 
 
-    /*
-    * Metoden herunder håndterer oprettelse af brugere ved at anvende en prædefineret firebase metode
-    * signInWithEmailAndPassword tager en mail og et password med som argumenter og foretager et asynkront kald, der eksekverer en brugeroprettelse i firebase
-    * Til sidst populeres felterne for den globale bruger med de indtastede oplysningerne i formularen
-    */
+    //Handler submitten
     const handleSubmit = async() => {
         const user = createUser()
         try {
+            //Hvis de er bruker
             await firebase.auth().createUserWithEmailAndPassword(username, password);
             firebase
                 .database()
                 .ref('/users/')
                 .push(user).then(r => {
                 setGlobalUser({
+                    //Get key på alle instansene
                     id: r.getKey(),
                     birtDate: day,
                     birthMonth: month,
@@ -84,13 +83,13 @@ function SignUp({navigation}) {
             })
 
         } catch (error) {
-            //Error handling er ikke implementeret
+            //Logger bare erroren
 
             console.log(`Error: ${error.message}`);
         }
     }
 
-    //Layout af app
+    //Layout af app -Styling
     return (
         <View style={{...Styles.container, minHeight: height, borderWidth: 1, textAlign: 'center' }}>
             <View style={Styles.subContainer} >
@@ -150,4 +149,5 @@ function SignUp({navigation}) {
         </View>
     );
 }
+//Eskporterer
 export default SignUp

@@ -1,7 +1,10 @@
 import {Pressable, Text} from "react-native";
 import Styles from "../../../globalStyles/Styles";
 import React from "react";
-
+//Funksjon for knapp
+//Endre profil
+//Endre Passord
+// + Log out
 function Buttons (props) {
     return <>
         <Pressable
@@ -27,4 +30,5 @@ function Buttons (props) {
         </Pressable>
     </>;
 }
+//Eksporter funksjon
 export default Buttons

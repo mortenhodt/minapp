@@ -16,7 +16,7 @@ import CredentialsComponent from "./ProfileViewComponents/CredentialsComponent";
 import DetailsComponent from "./ProfileViewComponents/DetailsComponent";
 import Buttons from "./ProfileViewComponents/Buttons";
 
-
+//Hjem screen
 function HomeScreen() {
     const height = useWindowDimensions().height
     const [isVisibleModalProfile, setProfileModalVisibility] = useState(false)
@@ -37,7 +37,7 @@ function HomeScreen() {
         setNewYear(date.getFullYear())
         setShowDatePicker(false)
     };
-
+//Oppdater Bruker
     const updateGlobalUser = () => {
         setGlobalUser({
             id: globalUser.id,
@@ -51,7 +51,7 @@ function HomeScreen() {
         })
     }
 
-
+//Slette og eliminere fields
     const cleanFields = () => {
         setNewPassword("")
         setNewFirstname("")
@@ -61,7 +61,7 @@ function HomeScreen() {
         setNewYear(null)
         setOldPassword("")
     }
-
+//Oppdatere
     const updateCredentials = () => {
         try {
             const user = firebase.auth().currentUser
@@ -81,6 +81,7 @@ function HomeScreen() {
 
     }
 
+    //Oppdatere bruker
     const updateUser = () => {
         const userDetails = {
             birtDate: day ? day: globalUser.birtDate,
@@ -106,11 +107,13 @@ function HomeScreen() {
         }
     }
 
+    //Avslutingsvis vi ønsker å kunne logge ut
     const handleLogOut = async () => {
         setGlobalUser({ id: null, birtDate: null, birthMonth: null, birthYear: null, firstname: null, lastname: null, username: null, countries: []});
         await firebase.auth().signOut()
     };
 
+    //Hvis det ikke finnes en bruker
     if (globalUser.username != null) {
         return (
             <View style={{...Styles.container, justifyContent: 'flex-start'}}>
@@ -159,9 +162,9 @@ function HomeScreen() {
     } else return <View style={Styles.container} ><ActivityIndicator size="large" color="#0000ff" /><Text>Loading</Text></View>
 }
 
-
+//eksporterer
 export default HomeScreen
-
+//Lokal styling
 const stylesLocal = StyleSheet.create({
     btnLocalDateTime: {
         width: 200,

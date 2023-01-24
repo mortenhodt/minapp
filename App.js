@@ -5,6 +5,7 @@ import firebase from "firebase/compat";
 import React, { useEffect, useState} from "react";
 import {StateProvider} from "./components/AppContext";
 
+//Henter fra Exercise time i Innovasjon - se template fra den hvis noe er usikkert!
 //now using a real time database
 const firebaseConfig = {
 

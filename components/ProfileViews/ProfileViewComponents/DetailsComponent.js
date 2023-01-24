@@ -3,6 +3,7 @@ import Styles from "../../../globalStyles/Styles";
 import {formatDayOrMonth} from "../../helperfunctions";
 import React from "react";
 
+//Funksjon details
 function DetailsComponent (props) {
     return <>
         <TextInput
@@ -25,4 +26,5 @@ function DetailsComponent (props) {
         />
     </>;
 }
+//Eksporter
 export default DetailsComponent;
