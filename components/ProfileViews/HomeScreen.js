@@ -1,9 +1,6 @@
 import {
     View,
     Text,
-    TextInput,
-    Pressable,
-    TouchableOpacity,
     StyleSheet,
     Alert,
     useWindowDimensions,
